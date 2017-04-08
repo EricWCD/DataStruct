@@ -2,6 +2,7 @@
 package lab6;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
 
@@ -22,6 +23,16 @@ public class Lab6 {
       
       carWashSimulate(WASHTIME, ARRIVALPROB, TOTALTIME, maxLen);
    }
+     
+     private static Server[] createMultipleServers(int numberOfServers,int washTime){
+         Server[] servers = new Server[numberOfServers];
+         for (int i = 0; i < numberOfServers; i++) {
+             Server server = new Server(washTime);
+             servers[i] = server;
+         }
+         return servers;
+     }
+     
     
    public static void carWashSimulate
    (int washTime, double arrivalProb, int totalTime, int max)
@@ -29,7 +40,10 @@ public class Lab6 {
       Queue<Integer> arrivalTimes = new LinkedList<Integer>( );  
       int next;
       ClientGenerator arrival = new ClientGenerator(arrivalProb);
-      Server machine = new Server(washTime);
+       
+      Server[] servers = createMultipleServers(3,washTime);
+       
+      
       Averager waitTimes = new Averager( );
       Averager longerWaitTimes = new Averager();
       int currentSecond;
@@ -56,16 +70,16 @@ public class Lab6 {
             System.out.println("Customer arrived at " + currentSecond);
         }
          // Check whether we can start washing another car.
-         if ((!machine.isBusy( ))  &&  (!arrivalTimes.isEmpty( )))
+         if ((!servers[0].isBusy( ))  &&  (!arrivalTimes.isEmpty( )))
          {
             next = arrivalTimes.remove( );
             waitTimes.addNumber(currentSecond - next);
-            machine.start( );
+            servers[0].start( );
             System.out.println("Server started at " + currentSecond);
          }
 
          // Subtract one second from the remaining time in the current wash cycle.
-         machine.reduceRemainingTime( );
+         servers[0].reduceRemainingTime( );
       }
       while (!arrivalTimes.isEmpty())
       {
