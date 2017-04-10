@@ -9,8 +9,8 @@ public class Lab6 {
 
     public static void main(String[] args) {
         Scanner kb = new Scanner(System.in);
-        System.out.println("Enter wash time: ");
-        int WASHTIME = kb.nextInt();
+        System.out.println("Enter ride time: ");
+        int RIDETIME = kb.nextInt();
         System.out.println("Enter arrival probability: ");
         double ARRIVALPROB = kb.nextDouble();
         System.out.println("enter time for simulation: ");
@@ -18,25 +18,25 @@ public class Lab6 {
         System.out.println("Enter maximum queue length: ");
         int maxLen = kb.nextInt();
 
-        carWashSimulate(WASHTIME, ARRIVALPROB, TOTALTIME, maxLen);
-        economicElements(WASHTIME, ARRIVALPROB, TOTALTIME, maxLen);
-        graphicalElement(WASHTIME, ARRIVALPROB, TOTALTIME, maxLen);
+        themeParkSimulate(RIDETIME, ARRIVALPROB, TOTALTIME, maxLen);
+        economicElements(RIDETIME, ARRIVALPROB, TOTALTIME, maxLen);
+        graphicalElement(RIDETIME, ARRIVALPROB, TOTALTIME, maxLen);
     }
 
     /**
      *
      * @param numberOfServers
-     * @param washTime
+     * @param rideTime
      * @return
      */
-    private static Server[] createMultipleServers(int numberOfServers, int washTime) {
+    private static Server[] createMultipleServers(int numberOfServers, int rideTime) {
         Server[] servers = new Server[numberOfServers];
         for (int i = 0; i < numberOfServers; i++) {
             Server server;
             if (i == 0) {
-                server = new Server(washTime / 2);
+                server = new Server(rideTime / 2);
             }else{
-                server = new Server(washTime);
+                server = new Server(rideTime);
             }
             servers[i] = server;
         }
@@ -52,7 +52,7 @@ public class Lab6 {
         return queues;
     }
 
-    public static void carWashSimulate(int washTime, double arrivalProb, int totalTime, int max) {
+    public static void themeParkSimulate(int rideTime, double arrivalProb, int totalTime, int max) {
 
         Queue[] queues = createMultipleQueues(3);
 
@@ -63,20 +63,20 @@ public class Lab6 {
          *
          * calls the createMultipleServers method.
          */
-        Server[] servers = createMultipleServers(3, washTime);
+        Server[] servers = createMultipleServers(3, rideTime);
 
         Averager waitTimes = new Averager();
         Averager longerWaitTimes = new Averager();
         int currentSecond;
 
         // Write the parameters to System.out.
-        System.out.println("Seconds to wash one car: " + washTime);
+        System.out.println("Seconds on ride: " + rideTime);
         System.out.print("Probability of customer arrival during a second: ");
         System.out.println(arrivalProb);
         System.out.println("Total simulation seconds: " + totalTime);
 
         // Check the precondition:
-        if (washTime <= 0 || arrivalProb < 0 || arrivalProb > 1 || totalTime < 0) {
+        if (rideTime <= 0 || arrivalProb < 0 || arrivalProb > 1 || totalTime < 0) {
             throw new IllegalArgumentException("Values out of range");
         }
 
@@ -120,7 +120,7 @@ public class Lab6 {
                 }
 
             }
-            // Check whether we can start washing another car.
+            // Check whether we can start another ride.
             /**
              * original commented out.
              */
@@ -167,7 +167,7 @@ public class Lab6 {
         }
     }
 
-    public static void graphicalElement(int washTime, double arrivalProb, int totalTime, int max) {
+    public static void graphicalElement(int rideTime, double arrivalProb, int totalTime, int max) {
 
         Queue[] queues = createMultipleQueues(3);
 
@@ -176,7 +176,7 @@ public class Lab6 {
         int currentSecond;
 
         // Check the precondition:
-        if (washTime <= 0 || arrivalProb < 0 || arrivalProb > 1 || totalTime < 0) {
+        if (rideTime <= 0 || arrivalProb < 0 || arrivalProb > 1 || totalTime < 0) {
             throw new IllegalArgumentException("Values out of range");
         }
 
@@ -219,7 +219,7 @@ public class Lab6 {
         }
     }
 
-    public static void economicElements(int washTime, double arrivalProb, int totalTime, int max) {
+    public static void economicElements(int rideTime, double arrivalProb, int totalTime, int max) {
 
         Queue[] queues = createMultipleQueues(3);
 
@@ -233,7 +233,7 @@ public class Lab6 {
         double profit = 0;
 
         // Check the precondition:
-        if (washTime <= 0 || arrivalProb < 0 || arrivalProb > 1 || totalTime < 0) {
+        if (rideTime <= 0 || arrivalProb < 0 || arrivalProb > 1 || totalTime < 0) {
             throw new IllegalArgumentException("Values out of range");
         }
 
