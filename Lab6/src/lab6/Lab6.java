@@ -32,7 +32,12 @@ public class Lab6 {
     private static Server[] createMultipleServers(int numberOfServers, int washTime) {
         Server[] servers = new Server[numberOfServers];
         for (int i = 0; i < numberOfServers; i++) {
-            Server server = new Server(washTime);
+            Server server;
+            if (i == 0) {
+                server = new Server(washTime / 2);
+            }else{
+                server = new Server(washTime);
+            }
             servers[i] = server;
         }
         return servers;
