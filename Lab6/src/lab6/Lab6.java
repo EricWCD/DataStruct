@@ -23,8 +23,7 @@ public class Lab6 {
     }
     
     /**
-     * Created by Eric Walton
-     * 2017/04/07
+     * 
      * @param numberOfServers
      * @param washTime
      * @return 
@@ -57,8 +56,7 @@ public class Lab6 {
         ClientGenerator arrival = new ClientGenerator(arrivalProb);
 
         /**
-         * created by Eric Walton
-         * 2017/04/07
+         * 
          * calls the createMultipleServers method.
          */
         Server[] servers = createMultipleServers(3, washTime);
@@ -83,7 +81,7 @@ public class Lab6 {
             // Check whether a new customer has arrived.
             if (arrival.query()) {
                 /**
-                 * Modified by Eric Walton
+                 * Modified 
                  * 2017/04/07
                  */
 //                if (queue1.size() >= max) {
@@ -97,6 +95,8 @@ public class Lab6 {
                 if (queues[0].size() < queues[1].size() && queues[0].size() < queues[2].size()) {
                     if (queues[0].size() >= max) {
                         System.out.println("Queue1 Lost a customer at " + currentSecond);
+                        // we can add a lost variable for each queue and increment it. When the program is done
+                        // we can print the graphic for line queue, served and lost.
                     }else{
                         queues[0].add(currentSecond);
                         System.out.println("customer added to queue(1)");
@@ -120,7 +120,7 @@ public class Lab6 {
             }
             // Check whether we can start washing another car.
             /**
-             * Modified by Eric Walton 04/07/2017 original commented out.
+             * original commented out.
              */
 //         if ((!servers[0].isBusy( ))  &&  (!queue1.isEmpty( )))
 //         {
@@ -130,16 +130,18 @@ public class Lab6 {
 //            System.out.println("Server started at " + currentSecond);
 //         }
             /**
-             * Created by Eric Walton 
-             * 2017/04/07 
              * Checks to see if there are any arrivalTimes and
              * checks each server to see if they are busy 
              */
                 int serverNum = 0;
+                int queNum = 0;
                 for (Server server : servers) {
                     serverNum++;
-                    if (!server.isBusy() && !queues[0].isEmpty()) {
-                            next = (int) queues[0].remove();
+                    if (queNum < 2) {
+                        queNum++;
+                    }
+                    if (!server.isBusy() && !queues[queNum].isEmpty()) {
+                            next = (int) queues[queNum].remove();
                             waitTimes.addNumber(currentSecond - next);
                         server.start();
                         System.out.println("Server(" + serverNum + ") started at " + currentSecond);
@@ -147,23 +149,8 @@ public class Lab6 {
                         server.reduceRemainingTime();
                     }
                 }
-                
-                
             
-
-            // Subtract one second from the remaining time in the current wash cycle.
-            /**
-             * modified by Eric Walton
-             * handled in if server.isBusy inside the for loop above
-             */
-            //servers[0].reduceRemainingTime();            
-
-            // Subtract one second from the remaining time in the current wash cycle.
-            /**
-             * modified by Eric Walton
-             * handled in if server.isBusy inside the for loop above
-             */
-            //servers[0].reduceRemainingTime();
+            
         }
         while (!queues[0].isEmpty()) {
             next = (int) queues[0].remove();
@@ -184,6 +171,7 @@ public class Lab6 {
         Queue[] queues = createMultipleQueues(3);
 
         ClientGenerator arrival = new ClientGenerator(arrivalProb);
+        
 
         int currentSecond;
 
