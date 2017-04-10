@@ -19,14 +19,15 @@ public class Lab6 {
         int maxLen = kb.nextInt();
 
         carWashSimulate(WASHTIME, ARRIVALPROB, TOTALTIME, maxLen);
+        economicElements(WASHTIME, ARRIVALPROB, TOTALTIME, maxLen);
         graphicalElement(WASHTIME, ARRIVALPROB, TOTALTIME, maxLen);
     }
-    
+
     /**
-     * 
+     *
      * @param numberOfServers
      * @param washTime
-     * @return 
+     * @return
      */
     private static Server[] createMultipleServers(int numberOfServers, int washTime) {
         Server[] servers = new Server[numberOfServers];
@@ -36,8 +37,8 @@ public class Lab6 {
         }
         return servers;
     }
-    
-    private static Queue[] createMultipleQueues(int numberOfQueues){
+
+    private static Queue[] createMultipleQueues(int numberOfQueues) {
         Queue[] queues = new Queue[3];
         for (int i = 0; i < numberOfQueues; i++) {
             Queue<Integer> queue = new LinkedList<Integer>();
@@ -45,18 +46,16 @@ public class Lab6 {
         }
         return queues;
     }
-    
-    
+
     public static void carWashSimulate(int washTime, double arrivalProb, int totalTime, int max) {
-        
-        
+
         Queue[] queues = createMultipleQueues(3);
-        
+
         int next;
         ClientGenerator arrival = new ClientGenerator(arrivalProb);
 
         /**
-         * 
+         *
          * calls the createMultipleServers method.
          */
         Server[] servers = createMultipleServers(3, washTime);
@@ -81,8 +80,7 @@ public class Lab6 {
             // Check whether a new customer has arrived.
             if (arrival.query()) {
                 /**
-                 * Modified 
-                 * 2017/04/07
+                 * Modified 2017/04/07
                  */
 //                if (queue1.size() >= max) {
 //                    System.out.println("Lost a customer at " + currentSecond);
@@ -90,33 +88,32 @@ public class Lab6 {
 //                    queue1.add(currentSecond);
 //                }
                 System.out.println("Customer arrived at " + currentSecond);
-                
-                
+
                 if (queues[0].size() < queues[1].size() && queues[0].size() < queues[2].size()) {
                     if (queues[0].size() >= max) {
                         System.out.println("Queue1 Lost a customer at " + currentSecond);
                         // we can add a lost variable for each queue and increment it. When the program is done
                         // we can print the graphic for line queue, served and lost.
-                    }else{
+                    } else {
                         queues[0].add(currentSecond);
                         System.out.println("customer added to queue(1)");
                     }
-                }else if(queues[1].size() < queues[2].size()){
+                } else if (queues[1].size() < queues[2].size()) {
                     if (queues[1].size() >= max) {
                         System.out.println("Queue2 Lost a customer at " + currentSecond);
-                    }else{
+                    } else {
                         queues[1].add(currentSecond);
                         System.out.println("customer added to queue(2)");
                     }
-                }else{
+                } else {
                     if (queues[2].size() >= max) {
                         System.out.println("Queue3 Lost a customer at " + currentSecond);
-                    }else{
+                    } else {
                         queues[2].add(currentSecond);
                         System.out.println("customer added to queue(3)");
                     }
                 }
-                
+
             }
             // Check whether we can start washing another car.
             /**
@@ -130,27 +127,26 @@ public class Lab6 {
 //            System.out.println("Server started at " + currentSecond);
 //         }
             /**
-             * Checks to see if there are any arrivalTimes and
-             * checks each server to see if they are busy 
+             * Checks to see if there are any arrivalTimes and checks each
+             * server to see if they are busy
              */
-                int serverNum = 0;
-                int queNum = 0;
-                for (Server server : servers) {
-                    serverNum++;
-                    if (queNum < 2) {
-                        queNum++;
-                    }
-                    if (!server.isBusy() && !queues[queNum].isEmpty()) {
-                            next = (int) queues[queNum].remove();
-                            waitTimes.addNumber(currentSecond - next);
-                        server.start();
-                        System.out.println("Server(" + serverNum + ") started at " + currentSecond);
-                    }else{
-                        server.reduceRemainingTime();
-                    }
+            int serverNum = 0;
+            int queNum = 0;
+            for (Server server : servers) {
+                serverNum++;
+                if (queNum < 2) {
+                    queNum++;
                 }
-            
-            
+                if (!server.isBusy() && !queues[queNum].isEmpty()) {
+                    next = (int) queues[queNum].remove();
+                    waitTimes.addNumber(currentSecond - next);
+                    server.start();
+                    System.out.println("Server(" + serverNum + ") started at " + currentSecond);
+                } else {
+                    server.reduceRemainingTime();
+                }
+            }
+
         }
         while (!queues[0].isEmpty()) {
             next = (int) queues[0].remove();
@@ -165,13 +161,12 @@ public class Lab6 {
             System.out.println("Average wait for customers left on queue: " + longerWaitTimes.average() + " sec");
         }
     }
-    
-       public static void graphicalElement(int washTime, double arrivalProb, int totalTime, int max) {
+
+    public static void graphicalElement(int washTime, double arrivalProb, int totalTime, int max) {
 
         Queue[] queues = createMultipleQueues(3);
 
         ClientGenerator arrival = new ClientGenerator(arrivalProb);
-        
 
         int currentSecond;
 
@@ -179,10 +174,10 @@ public class Lab6 {
         if (washTime <= 0 || arrivalProb < 0 || arrivalProb > 1 || totalTime < 0) {
             throw new IllegalArgumentException("Values out of range");
         }
-        
+
         System.out.println("");
         System.out.println("Visual Indication of each queue: ");
-        System.out.println("++ means a customer was added"); 
+        System.out.println("++ means a customer was added");
         System.out.println("-- means the queue lost a customer");
         System.out.printf("%-10s %-10s %-10s\n", "Queue 1", "Queue 2", "Queue 3");
         System.out.println("................................");
@@ -191,9 +186,8 @@ public class Lab6 {
 
             // Check whether a new customer has arrived.
             if (arrival.query()) {
-           
-                //System.out.println("Customer arrived at ".replace("Customer arrived at", "O"));
 
+                //System.out.println("Customer arrived at ".replace("Customer arrived at", "O"));
                 if (queues[0].size() < queues[1].size() && queues[0].size() < queues[2].size()) {
                     if (queues[0].size() >= max) {
                         System.out.println("Queue1 Lost a customer at ".replace("Queue1 Lost a customer at ", "  --"));
@@ -218,6 +212,62 @@ public class Lab6 {
                 }
             }
         }
+    }
+
+    public static void economicElements(int washTime, double arrivalProb, int totalTime, int max) {
+
+        Queue[] queues = createMultipleQueues(3);
+
+        ClientGenerator arrival = new ClientGenerator(arrivalProb);
+
+        int currentSecond;
+        double stotal = 0;
+        final double HOURLY_WAGES = 30;
+        final double HOURLY_OPERATING_COST = 90;
+        double expenses = 0;
+        double profit = 0;
+
+        // Check the precondition:
+        if (washTime <= 0 || arrivalProb < 0 || arrivalProb > 1 || totalTime < 0) {
+            throw new IllegalArgumentException("Values out of range");
+        }
+
+        for (currentSecond = 0; currentSecond < totalTime; currentSecond++) {  // Simulate the passage of one second of time.
+
+            // Check whether a new customer has arrived.
+            if (arrival.query()) {
+
+                //System.out.println("Customer arrived at ".replace("Customer arrived at", "O"));
+                if (queues[0].size() < queues[1].size() && queues[0].size() < queues[2].size()) {
+                    if (queues[0].size() >= max) {
+                        stotal = stotal;
+                    } else {
+                        queues[0].add(currentSecond);
+                        stotal = stotal + 5;
+                    }
+                } else if (queues[1].size() < queues[2].size()) {
+                    if (queues[1].size() >= max) {
+                        stotal = stotal;
+                    } else {
+                        queues[1].add(currentSecond);
+                        stotal = stotal + 5;
+                    }
+                } else {
+                    if (queues[2].size() >= max) {
+                        stotal = stotal;
+                    } else {
+                        queues[2].add(currentSecond);
+                        stotal = stotal + 5;
+                    }
+                }
+            }
+        }
+
+        System.out.println("\nTotal Sales: " + stotal);
+        expenses = ((HOURLY_WAGES + HOURLY_OPERATING_COST) / 3600) * totalTime;
+        profit = stotal - expenses;
+        System.out.println("Expenses for this time period: " + expenses);
+        System.out.println("Profit for this time period: " + profit);
     }
 
 }
