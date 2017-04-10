@@ -19,6 +19,7 @@ public class Lab6 {
         int maxLen = kb.nextInt();
 
         carWashSimulate(WASHTIME, ARRIVALPROB, TOTALTIME, maxLen);
+        graphicalElement(WASHTIME, ARRIVALPROB, TOTALTIME, maxLen);
     }
     
     /**
@@ -175,6 +176,59 @@ public class Lab6 {
         }
         if (longerWaitTimes.howManyNumbers() > 0) {
             System.out.println("Average wait for customers left on queue: " + longerWaitTimes.average() + " sec");
+        }
+    }
+    
+       public static void graphicalElement(int washTime, double arrivalProb, int totalTime, int max) {
+
+        Queue[] queues = createMultipleQueues(3);
+
+        ClientGenerator arrival = new ClientGenerator(arrivalProb);
+
+        int currentSecond;
+
+        // Check the precondition:
+        if (washTime <= 0 || arrivalProb < 0 || arrivalProb > 1 || totalTime < 0) {
+            throw new IllegalArgumentException("Values out of range");
+        }
+        
+        System.out.println("");
+        System.out.println("Visual Indication of each queue: ");
+        System.out.println("++ means a customer was added"); 
+        System.out.println("-- means the queue lost a customer");
+        System.out.printf("%-10s %-10s %-10s\n", "Queue 1", "Queue 2", "Queue 3");
+        System.out.println("................................");
+
+        for (currentSecond = 0; currentSecond < totalTime; currentSecond++) {  // Simulate the passage of one second of time.
+
+            // Check whether a new customer has arrived.
+            if (arrival.query()) {
+           
+                //System.out.println("Customer arrived at ".replace("Customer arrived at", "O"));
+
+                if (queues[0].size() < queues[1].size() && queues[0].size() < queues[2].size()) {
+                    if (queues[0].size() >= max) {
+                        System.out.println("Queue1 Lost a customer at ".replace("Queue1 Lost a customer at ", "  --"));
+                    } else {
+                        queues[0].add(currentSecond);
+                        System.out.println("customer added to queue(1)".replace("customer added to queue(1)", "  ++"));
+                    }
+                } else if (queues[1].size() < queues[2].size()) {
+                    if (queues[1].size() >= max) {
+                        System.out.println("Queue2 Lost a customer at ".replace("Queue2 Lost a customer at ", "\t     --"));
+                    } else {
+                        queues[1].add(currentSecond);
+                        System.out.println("customer added to queue(2)".replace("customer added to queue(2)", " \t     ++"));
+                    }
+                } else {
+                    if (queues[2].size() >= max) {
+                        System.out.println("Queue3 Lost a customer at ".replace("Queue3 Lost a customer at ", "\t\t\t--"));
+                    } else {
+                        queues[2].add(currentSecond);
+                        System.out.println("customer added to queue(3)".replace("customer added to queue(3)", "\t\t\t++"));
+                    }
+                }
+            }
         }
     }
 
