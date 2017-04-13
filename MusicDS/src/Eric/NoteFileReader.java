@@ -21,19 +21,42 @@ public class NoteFileReader {
     private static char separator = ' ';
 
     public static Song readFile() {
+        
+        // method variables
         Song song = new Song("abc.txt");
+        Song repeatQueue = new Song();
+        Note note = new Note();
+        boolean repeat = false;
+        // end method variables
+        
         try {
             BufferedReader reader = new BufferedReader(new FileReader(new File(song.getNoteFilePath())));
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] fileObject = line.split("\\s");
                 
-                Note note = new Note();
-                System.out.println("pitch: " + fileObject[0] + " durp: " + fileObject[1]);
                 note.setPitch(fileObject[0]);
                 note.setDuration(fileObject[1].charAt(0));
-                song.getSongQueue().add(note);
-                System.out.println("song: " + song.getSongQueue().size());
+                
+                if (fileObject[2].equals("true")) {
+                    repeat = !repeat;
+                }
+                
+                if (repeat) {
+                    song.getSongQueue().add(note);
+                    repeatQueue.getSongQueue().add(note);
+                }else{
+                    if (repeatQueue.getSongQueue().size() > 0) {
+                        while(!repeatQueue.getSongQueue().isEmpty()){
+                            song.getSongQueue().add(repeatQueue.getSongQueue().poll());
+                        }
+                        
+                    }else{
+                        song.getSongQueue().add(note);
+                    }
+                }
+                System.out.println("r: " + repeatQueue.getSongQueue().size());
+                System.out.println("s: " + song.getSongQueue().size());
             
                 // Project thisProject = new Project();
 //                thisProject.setName(fileObject[2]);

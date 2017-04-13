@@ -160,7 +160,8 @@ public class MusicDS {
             System.out.println("E. See note information");
             System.out.println("F. Hear note");
             System.out.println("G. Measure Menu");
-            System.out.println("H. Quit");
+            System.out.println("H. Read Song");
+            System.out.println("I. Quit");
             System.out.print("Your choice: ");
             String input = kb.nextLine();
             if(input.equalsIgnoreCase("a"))
@@ -177,7 +178,11 @@ public class MusicDS {
                 playNote(n);
             else if(input.equalsIgnoreCase("g"))
                 runMeasureMenu(n);
-            else if(input.equalsIgnoreCase("h")) {
+            else if (input.equalsIgnoreCase("h")) {
+                done = true;
+                System.out.println("song: " + NoteFileReader.readFile().getSongQueue().size());
+            }
+            else if(input.equalsIgnoreCase("i")) {
                 System.out.println("Program ending");
                 done = true;
             }
@@ -204,7 +209,6 @@ public class MusicDS {
             System.out.println("H. Change rest duration");
             System.out.println("I. Add rest");
             System.out.println("J. Quit");
-            System.out.println("K. Read File");
             System.out.println("Current note: " + n.getPitchSymbol() + " " + n.getDuration());
             System.out.println("Rest info: " + "" + rest.Pitch + " " + rest.getDuration());
             System.out.println("measure count " + measure.getMeasure().size());
@@ -245,10 +249,7 @@ public class MusicDS {
             else if(input.equalsIgnoreCase("j")){
                 done = true;
             }
-            else if (input.equalsIgnoreCase("k")) {
-                System.out.println("song: " + NoteFileReader.readFile());
-                
-            }
+            
         }
     }
     
