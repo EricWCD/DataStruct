@@ -25,7 +25,7 @@ public class MusicDS {
         
          MusicNote note = new Note();
           // Automatic tests
-        runAutoTests(note);
+//        runAutoTests(note);
         // Interactive tests
         runUserTests(note);
     } // end main
@@ -204,6 +204,7 @@ public class MusicDS {
             System.out.println("H. Change rest duration");
             System.out.println("I. Add rest");
             System.out.println("J. Quit");
+            System.out.println("K. Read File");
             System.out.println("Current note: " + n.getPitchSymbol() + " " + n.getDuration());
             System.out.println("Rest info: " + "" + rest.Pitch + " " + rest.getDuration());
             System.out.println("measure count " + measure.getMeasure().size());
@@ -241,8 +242,13 @@ public class MusicDS {
                     System.err.println(e);
                 }
             }
-            else if(input.equalsIgnoreCase("j"))
+            else if(input.equalsIgnoreCase("j")){
                 done = true;
+            }
+            else if (input.equalsIgnoreCase("k")) {
+                System.out.println("song: " + NoteFileReader.readFile());
+                
+            }
         }
     }
     
