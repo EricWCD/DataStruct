@@ -18,6 +18,8 @@ import org.jfugue.*;
 
 public class MusicDS {
 
+    private static Song song = new Song();
+    private static Scanner kb = new Scanner(System.in);
     /**
      * @param args the command line arguments
      */
@@ -147,7 +149,6 @@ public class MusicDS {
     
 
     public static void runUserTests(MusicNote n) {
-        Scanner kb = new Scanner(System.in);
         System.out.println("Current note information:");
         getNoteInfo(n);
         boolean done = false;
@@ -160,8 +161,9 @@ public class MusicDS {
             System.out.println("E. See note information");
             System.out.println("F. Hear note");
             System.out.println("G. Measure Menu");
-            System.out.println("H. Read Song");
-            System.out.println("I. Quit");
+            System.out.println("H. Read Song From File");
+            System.out.println("I. Get song length");
+            System.out.println("J. Quit");
             System.out.print("Your choice: ");
             String input = kb.nextLine();
             if(input.equalsIgnoreCase("a"))
@@ -179,13 +181,17 @@ public class MusicDS {
             else if(input.equalsIgnoreCase("g"))
                 runMeasureMenu(n);
             else if (input.equalsIgnoreCase("h")) {
-                Song song = NoteFileReader.readFile();
-                System.out.println(song);
-                done = true;
+                song = NoteFileReader.readFile();
+                System.out.println("\n" + song);
+                menuOrExit();
+            }else if (input.equalsIgnoreCase("i")) {
+                System.out.println("\n" + song);
+                System.out.println("Length in seconds: " + song.GetSongLength(song));
+                menuOrExit();
             }
-            else if(input.equalsIgnoreCase("i")) {
+            else if(input.equalsIgnoreCase("j")) {
                 System.out.println("Program ending");
-                done = true;
+                
             }
             else
                 System.out.println(input + " not a valid option. Try again.");
@@ -193,8 +199,24 @@ public class MusicDS {
         
     }
     
+    public static void menuOrExit(){
+        boolean done = false;
+        while(!done){
+            System.out.println("\nChoose an option:");
+            System.out.println("M. Menu");
+            System.out.println("Q. Quit");
+            String input = kb.nextLine();
+            if(input.equalsIgnoreCase("m")){
+                done = true;
+            }else if(input.equalsIgnoreCase("q")){
+                System.exit(0);
+            }
+                
+        }
+    }
+    
+    
     public static void runMeasureMenu(MusicNote n){
-        Scanner kb = new Scanner(System.in);
         Measure measure = new Measure();
         Rest rest = new Rest();
         boolean done = false;

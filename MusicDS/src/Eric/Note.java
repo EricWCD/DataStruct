@@ -234,7 +234,7 @@ public class Note implements MusicNote{
     }
     
    public String toString(){ 
-       return this.getPitchSymbol() + " " + this.Duration + "\n";
+       return this.getPitchSymbol() + " " + this.Duration + ", ";
    }
     
 } // end of class
