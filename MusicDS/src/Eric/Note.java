@@ -233,6 +233,8 @@ public class Note implements MusicNote{
         return this.PitchFrequency;
     }
     
-   
+   public String toString(){ 
+       return this.getPitchSymbol() + " " + this.Duration + "\n";
+   }
     
 } // end of class

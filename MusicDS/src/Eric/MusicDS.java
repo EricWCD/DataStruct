@@ -179,8 +179,9 @@ public class MusicDS {
             else if(input.equalsIgnoreCase("g"))
                 runMeasureMenu(n);
             else if (input.equalsIgnoreCase("h")) {
+                Song song = NoteFileReader.readFile();
+                System.out.println(song);
                 done = true;
-                System.out.println("song: " + NoteFileReader.readFile().getSongQueue().size());
             }
             else if(input.equalsIgnoreCase("i")) {
                 System.out.println("Program ending");

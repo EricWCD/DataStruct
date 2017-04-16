@@ -27,8 +27,18 @@ public class Song {
         this.SongQueue = new LinkedList<Note>();
     }
 
+    @Override
+    public String toString(){
+         String output = "Song: ";
+        for (Note note : SongQueue) {
+            output += note;
+        }
+        return output;
+    }
     
-    
+    public void addNote(Note note) {
+        this.SongQueue.add(note);
+    }
     
     /**
      * @return the SongQueue
