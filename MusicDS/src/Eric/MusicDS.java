@@ -163,7 +163,8 @@ public class MusicDS {
             System.out.println("G. Measure Menu");
             System.out.println("H. Read Song From File");
             System.out.println("I. Get song length");
-            System.out.println("J. Quit");
+            System.out.println("J. Reverse song");
+            System.out.println("K. Quit");
             System.out.print("Your choice: ");
             String input = kb.nextLine();
             if(input.equalsIgnoreCase("a"))
@@ -188,8 +189,12 @@ public class MusicDS {
                 System.out.println("\n" + song);
                 System.out.println("Length in seconds: " + song.GetSongLength(song));
                 menuOrExit();
+            }else if (input.equalsIgnoreCase("j")) {
+                System.out.println("\n" + song);
+                System.out.println("Reversed: " + song.reverseSong(song));
+                menuOrExit();
             }
-            else if(input.equalsIgnoreCase("j")) {
+            else if(input.equalsIgnoreCase("k")) {
                 System.out.println("Program ending");
                 
             }

@@ -5,8 +5,11 @@
  */
 package Eric;
 
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  *
@@ -59,7 +62,7 @@ public class Song {
         this.noteFilePath = noteFilePath;
     }
 
-     @Override
+    @Override
     public String toString() {
         String output = "Song: ";
         int songSize = 0;
@@ -72,7 +75,7 @@ public class Song {
         }
         return output;
     }
-    
+
     public double GetSongLength(Song song) {
         double result = 0;
         for (Note note : SongQueue) {
@@ -96,8 +99,22 @@ public class Song {
                     throw new AssertionError();
             }
         }
-
         return result;
     }
 
-}
+    public Song reverseSong(Song song) {
+
+        Stack stacky = new Stack();  //create a stack
+
+        //empty the song while pushing it onto the stack
+        while (!song.SongQueue.isEmpty()) {
+            stacky.push(song.SongQueue.poll());
+        }
+        // takes the stack and puts it back in the song in reverse order
+        while (!stacky.isEmpty()) {
+            song.SongQueue.offer((Note) stacky.pop());
+        }
+        return song;
+    }
+
+} // end class
