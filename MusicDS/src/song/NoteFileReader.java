@@ -21,10 +21,10 @@ public class NoteFileReader {
 
     private static char separator = ' ';
 
-    public static Song readFile() {
+    public static Song readFile(String fileName) {
         
         // method variables
-        Song song = new Song("abc.txt");
+        Song song = new Song(fileName);
         Song repeatQueue = new Song();
         
         boolean repeat = false;

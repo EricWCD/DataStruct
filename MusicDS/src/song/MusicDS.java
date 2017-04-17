@@ -35,8 +35,43 @@ public class MusicDS {
           // Automatic tests
 //        runAutoTests(note);
         // Interactive tests
-        runUserTests(note);
+        runMusicNote3Test();
+//        runUserTests(note); moved to end of runMusicNote3Test
     } // end main
+    
+    private static void runMusicNote3Test(){
+        
+        System.out.println("Making an empty song");
+        Song autoSong = new Song();
+        System.out.println(autoSong);
+        System.out.println("Reading ABC song from file");
+        System.out.println(autoSong = NoteFileReader.readFile("abc.txt"));
+        System.out.println("Getting song lenght");
+        System.out.println(autoSong.GetSongLength(autoSong));
+        System.out.println("Reverse abc song: ");
+        System.out.println(autoSong.reverseSong(autoSong));
+        System.out.println("Changing ABC tempo to faster");
+        System.out.println(autoSong.changeTempo(2));
+        System.out.println("Changing ABC tempo to slower");
+        System.out.println(autoSong.changeTempo(-2));
+        System.out.println("Getting 2nd song frere jacques");
+        Song autoSong2 = NoteFileReader.readFile("frerejacques.txt");
+        System.out.println(autoSong2);
+        System.out.println("Reversing abc back to original: ");
+        System.out.println(autoSong.reverseSong(autoSong));
+        System.out.println("Adding frere jacques to the end of abc song: ");
+        System.out.println(autoSong.appendSong(autoSong, autoSong2));
+        System.out.println("Go to user menu or quit");
+        System.out.println("M. Menu");
+        System.out.println("Q. Quit");
+        if (kb.nextLine().equalsIgnoreCase("m")) {
+            MusicNote note = new Note();
+            runUserTests(note);
+        }else{
+            System.exit(0);
+        }
+        
+    }
     
    public static void runAutoTests(MusicNote n) {
        
@@ -171,7 +206,8 @@ public class MusicDS {
             System.out.println("I. Get song length");
             System.out.println("J. Change song tempo");
             System.out.println("K. Reverse song");
-            System.out.println("L. Quit");
+            System.out.println("L. Append a song to a song");
+            System.out.println("M. Quit");
             System.out.print("Your choice: ");
             String input = kb.nextLine();
             if(input.equalsIgnoreCase("a"))
@@ -189,7 +225,9 @@ public class MusicDS {
             else if(input.equalsIgnoreCase("g"))
                 runMeasureMenu(n);
             else if (input.equalsIgnoreCase("h")) {
-                song = NoteFileReader.readFile();
+                System.out.println("file names: abc.txt or frerejacques.txt");
+                System.out.println("Enter file name: ");
+                song = NoteFileReader.readFile(kb.nextLine());
                 System.out.println("\n" + song);
                 menuOrExit();
             }else if (input.equalsIgnoreCase("i")) {
@@ -208,10 +246,16 @@ public class MusicDS {
                 System.out.println("\n" + song);
                 System.out.println("Reversed: " + song.reverseSong(song));
                 menuOrExit();
-            }
-            else if(input.equalsIgnoreCase("l")) {
+            }else if (input.equalsIgnoreCase("l")) {
+                System.out.println("file names: abc.txt or frerejacques.txt");
+                System.out.println("Enter file name: ");
+                Song song2 = NoteFileReader.readFile(kb.nextLine());
+                System.out.println("\n" + song);
+                System.out.println("New Song: " + song.appendSong(song, song2));
+                menuOrExit();
+            }else if(input.equalsIgnoreCase("m")) {
                 System.out.println("Program ending");
-                
+                done = true;
             }
             else
                 System.out.println(input + " not a valid option. Try again.");

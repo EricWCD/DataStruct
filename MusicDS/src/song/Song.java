@@ -103,7 +103,7 @@ public class Song {
         }
         return result;
     }
-    
+
     public double changeTempo(int tempo) {
         double result = 0;
         for (Note note : SongQueue) {
@@ -171,7 +171,7 @@ public class Song {
                 }
             }
             if (tempo == 0) {
-              throw new IllegalArgumentException("Tempo can not be 0");
+                throw new IllegalArgumentException("Tempo can not be 0");
             }
         }
         return result;
@@ -190,6 +190,18 @@ public class Song {
             song.SongQueue.offer((Note) stacky.pop());
         }
         return song;
+    }
+
+    public Song appendSong(Song song1, Song song2) {
+        Song newSong = new Song();
+        while (!song1.getSongQueue().isEmpty()) {
+            newSong.addNote(song1.getSongQueue().poll());
+        }
+        while (!song2.getSongQueue().isEmpty()) {
+            newSong.addNote(song2.getSongQueue().poll());
+        }
+        
+        return newSong;
     }
 
 } // end class

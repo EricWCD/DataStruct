@@ -1,0 +1,16 @@
+F6 q true
+G6 q false
+A7 q false
+F6 q true
+A7 q true
+A7# q false
+C6 h true
+C6 e true
+D6 e false
+C6 e false
+A7# e false
+A7 e false
+F6 e true
+F6 q true
+C6 q false
+F6 q true
