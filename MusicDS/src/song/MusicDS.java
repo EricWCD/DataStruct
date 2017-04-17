@@ -251,7 +251,8 @@ public class MusicDS {
                 System.out.println("Enter file name: ");
                 Song song2 = NoteFileReader.readFile(kb.nextLine());
                 System.out.println("\n" + song);
-                System.out.println("New Song: " + song.appendSong(song, song2));
+                song = song.appendSong(song, song2);
+                System.out.println("New Song: " + song);
                 menuOrExit();
             }else if(input.equalsIgnoreCase("m")) {
                 System.out.println("Program ending");
