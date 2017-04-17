@@ -57,11 +57,10 @@ public class NoteFileReader {
             }
             reader.close();
         } catch (FileNotFoundException ex) {
-            System.err.println("File could not be found.");
-            System.exit(-1);
+            throw new IllegalArgumentException("File could not be found.");
+            
         } catch (IOException ex) {
-            System.err.println("There was an error reading from the file.\nError: ");
-            System.exit(-1);
+            throw new IllegalArgumentException("IOException " + ex);
         }
         return song;
     }
