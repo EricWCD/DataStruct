@@ -1,4 +1,4 @@
-package BST;
+package lab9;
 
 import java.util.*;
 
@@ -8,8 +8,8 @@ import java.util.*;
  */
 public class BSTtester {
     
-    public static void main (String [] args) {
-        BST<Integer> tree = new BST<Integer>(10);
+    public static void RunBSTTester(){
+              BST<Integer> tree = new BST<Integer>(10);
         Scanner kb = new Scanner(System.in);
         System.out.println("Building binary search tree with known values");
         tree.insert(15);
@@ -42,7 +42,7 @@ public class BSTtester {
             target = kb.nextInt();
             tree.remove(target);
             tree.print();
-        }        
+        }  
     }
     
 }

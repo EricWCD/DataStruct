@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package BST;
+package lab9;
 
 /**
  *
@@ -12,6 +12,8 @@ package BST;
 public class BST<E extends Comparable<E>> {
     
     private BTNode<E> root;  
+    
+    
 		
     public BST(E data) {
         root = new BTNode(data, null, null);
@@ -81,4 +83,10 @@ public class BST<E extends Comparable<E>> {
         root.print(0);
     }
 
+    BTNode<E> getRoot() {
+        return this.root;
+    }
+
+    
+    
 }

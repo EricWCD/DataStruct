@@ -59,9 +59,28 @@ public class BalancedSet {
     }
 
     private void looseAdd(int entry) {
+        int i;
+        for (i = 0; i < dataCount && data[i] < entry; i++);
+            if (i < data.length && data[i] == entry) {
+                return;
+            }
+            if (childCount == 0) {// add entry at this node
+                for (int x = data.length -1; x > i; x--) {
+                    data[x] = data[x -1]; // shift elements to make room
+                    data[i] = entry;
+                    dataCount++;
+                }
+        }else{// add entry to a subset, housekeep
+//                subset[i].looseAdd(entry);
+                if (subset[i].dataCount > MAXIMUM) {
+                    fixExcess(i);
+                }
+            }
     }
 
     public void add(int element) {
+//        looseAdd(element);
+        // add data, then chck to see if node still OK; if not:
     }
     
     private void fixExcess(int i) {

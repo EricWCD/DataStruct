@@ -7,6 +7,7 @@ package lab9;
 
 import java.util.Random;
 import java.util.Scanner;
+import static lab9.BSTtester.RunBSTTester;
 
 /**
  *
@@ -37,6 +38,9 @@ public class Lab9 {
             System.out.println ("found it!");
         else
             System.out.println ("all that time, and nothing to show for it!");
+        
+        RunBSTTester();
+        
     }
     
 }
