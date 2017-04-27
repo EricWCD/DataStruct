@@ -1,5 +1,6 @@
 package lab9;
 
+import static java.lang.Integer.parseInt;
 import java.util.*;
 
 /**
@@ -37,6 +38,31 @@ public class BSTtester {
             tree.insert((int)(Math.random()*50));
         tree.print();
         target = tree.getRoot().getData();
+        
+        /**
+         * 3a assignment tester
+         */
+        System.out.println("Enter a value to find the number of instances less than your value in the tree.");
+        int userNumber = parseInt(kb.nextLine());
+        System.out.println("nums less than "  + userNumber + ": " + tree.numLess(userNumber));
+        
+        /**
+         * 3b assignment tester
+         */
+        System.out.println("Enter a value to find the number of instances greater than your value in the tree.");
+        userNumber = parseInt(kb.nextLine());
+        System.out.println("nums greater than " + userNumber + ": " + tree.numGreater(userNumber));
+        
+        /**
+         * 3c assignment tester
+         */
+        System.out.println("Enter a begin value and an end value to find instances between them.");
+        System.out.println("Enter begin number");
+        userNumber = parseInt(kb.nextLine());
+        System.out.println("Enter end number");
+        int endNumber = parseInt(kb.nextLine());
+        System.out.println("nums between " + userNumber + " and " + endNumber + ": " + tree.numBetween(userNumber, endNumber));
+        
         while(target != 0) {
             System.out.print("Enter value to remove (or 0 to quit): ");
             target = kb.nextInt();
@@ -45,4 +71,6 @@ public class BSTtester {
         }  
     }
     
-}
+    
+    
+} // end of class
