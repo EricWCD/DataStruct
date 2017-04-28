@@ -7,6 +7,8 @@ package song;
 
 import java.util.Scanner;
 import org.jfugue.*;
+import static song.BSTtester.RunBSTTester;
+import static song.Program4Manager.DoProgram4Stuff;
 
 /**
  * All of the interface methods are implemented in note but need to be
@@ -26,17 +28,23 @@ public class MusicDS {
     private static Song song = new Song();
     private static Scanner kb = new Scanner(System.in);
 
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
 
+//        RunBSTTester();
+        DoProgram4Stuff();
         MusicNote note = new Note();
+        
         // Automatic tests
 //        runAutoTests(note);
         // Interactive tests
-        runMusicNote3Test();
+//        runMusicNote3Test();
 //        runUserTests(note); moved to end of runMusicNote3Test
+
+
     } // end main
 
     private static void runMusicNote3Test() {

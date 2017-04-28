@@ -12,7 +12,7 @@ import java.util.Arrays;
  * @author Eric Walton
  * Jessica Hoppe
  */
-public class Note implements MusicNote{
+public class Note implements MusicNote, Comparable<Note> {
 
    int PitchMIDIvalue = 0;
    double PitchFrequency = 0;
@@ -236,5 +236,12 @@ public class Note implements MusicNote{
    public String toString(){ 
        return this.getPitchSymbol() + " " + this.Duration + ", ";
    }
+
+    @Override
+    public int compareTo(Note o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
     
 } // end of class

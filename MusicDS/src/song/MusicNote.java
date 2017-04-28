@@ -9,8 +9,9 @@ package song;
 /**
  *
  * @author Cate Sheller
+ * @param <E>
  */
-public interface MusicNote 
+public interface MusicNote<E>
 {
     /**
      * Sets note pitch using a String containing a letter and a number
