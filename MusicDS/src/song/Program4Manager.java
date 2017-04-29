@@ -12,10 +12,11 @@ package song;
 public class Program4Manager {
     
     public static void DoProgram4Stuff(){
-        Note note = new Note();
+        MusicNote note = new Note();
 //        BST<MusicNote> tree = new BST<note>(10);
-          BST<Note> tree1 = new BST<>(note);
+          BST<MusicNote> tree1 = new BST<>(note);
           System.out.println("Tree 1: " + tree1.getRoot().getData().getPitchSymbol());
+          System.out.println("Compare midi test: " + tree1.getRoot().getData());
 //          System.out.println(tree1.getRoot().getData().compareTo(note)); // need to flesh out compareTo
     }
     

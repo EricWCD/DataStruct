@@ -83,5 +83,10 @@ public class Rest implements MusicNote{
         
         return valid;
     }
+
+    @Override
+    public int compareTo(MusicNote o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 } // end of class

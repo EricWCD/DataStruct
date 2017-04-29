@@ -11,7 +11,7 @@ package song;
  * @author Cate Sheller
  * @param <E>
  */
-public interface MusicNote<E>
+public interface MusicNote extends Comparable<MusicNote>
 {
     /**
      * Sets note pitch using a String containing a letter and a number

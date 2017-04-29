@@ -12,7 +12,7 @@ import java.util.Arrays;
  * @author Eric Walton
  * Jessica Hoppe
  */
-public class Note implements MusicNote, Comparable<Note> {
+public class Note implements MusicNote {
 
    int PitchMIDIvalue = 0;
    double PitchFrequency = 0;
@@ -238,10 +238,54 @@ public class Note implements MusicNote, Comparable<Note> {
    }
 
     @Override
-    public int compareTo(Note o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int compareTo(MusicNote o) {
+        int result = 0;
+        
+        
+        
+        return result;
     }
 
+    /**
+     * 
+     * @param other
+     * @return 
+     */
+    public int compareMIDI(MusicNote other){
+        int result = 0;
+        
+        if (other.getPitchMIDIvalue() > this.PitchMIDIvalue) {
+            result = 1;
+        }else if (other.getPitchMIDIvalue() == this.PitchMIDIvalue){
+            result = 0;
+        }else{
+            result = -1;
+        }
+        
+        return result;
+    }
+    
+    /**
+     * 
+     * @param other
+     * @return 
+     */
+    public int compareDuration(MusicNote other){
+        int result = 0;
+        char dur = other.getDuration();
+        
+        if (dur > this.Duration) {
+            result = 1;
+        }else if (dur == this.Duration){
+            result = 0;
+        }else{
+            result = -1;
+        }
+        return result;
+    }
+
+    
+    
     
     
 } // end of class
