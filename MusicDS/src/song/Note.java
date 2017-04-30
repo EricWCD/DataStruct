@@ -6,6 +6,8 @@
 package song;
 
 import java.util.Arrays;
+import static song.DurationHelper.getDurationValue;
+
 
 /**
  *
@@ -239,9 +241,11 @@ public class Note implements MusicNote {
 
     @Override
     public int compareTo(MusicNote o) {
-        int result = 0;
-        
-        
+        int result = compareMIDI(o);
+
+        if (result == 0) {
+            result = compareDuration(o);
+        }
         
         return result;
     }
@@ -272,11 +276,12 @@ public class Note implements MusicNote {
      */
     public int compareDuration(MusicNote other){
         int result = 0;
-        char dur = other.getDuration();
+        double otherDur = getDurationValue(other.getDuration());
+        double thisDur = getDurationValue(this.Duration);
         
-        if (dur > this.Duration) {
+        if (otherDur > thisDur) {
             result = 1;
-        }else if (dur == this.Duration){
+        }else if (otherDur == thisDur){
             result = 0;
         }else{
             result = -1;

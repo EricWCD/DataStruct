@@ -23,19 +23,19 @@ public class DurationHelper {
         
         switch (duration) {
                 case 's':
-                    measureDuration += s;
+                    measureDuration = s;
                     break;
                 case 'e':
-                    measureDuration += e;
+                    measureDuration = e;
                     break;
                 case 'q':
-                    measureDuration += q;
+                    measureDuration = q;
                     break;
                 case 'h':
-                    measureDuration += h;
+                    measureDuration = h;
                     break;
                 case 'w':
-                    measureDuration += w;
+                    measureDuration = w;
                     break;
                 default:
                     break;
