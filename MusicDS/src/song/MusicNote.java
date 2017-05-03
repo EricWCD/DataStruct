@@ -80,4 +80,8 @@ public interface MusicNote extends Comparable<MusicNote>
      * @return pitch represented by double value in Hertz
      */
     public double getPitchFrequency();    
+    
+    public int compareMIDI(MusicNote other);
+    public int compareDuration(MusicNote other);
+    
 }
